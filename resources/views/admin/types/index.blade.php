@@ -18,7 +18,7 @@
                                             <tr>
                                                 <th>Tipo</th>
                                                 <th style="width: 15%">Ações</th>
-                                              
+                                                
                                             </tr>
                                             </thead>
         
@@ -29,13 +29,16 @@
                                                     <td>{{$type->name}}</td>
                                                     
                                                     <td>
-                                                        <button class="btn btn-primary">Editar</button>
-                                                        <button class="btn btn-danger">Remover</button>
+                                                        <a href="{{route('types.edit', $type->id)}}" class="btn btn-primary" ><i class="fas fa-pen"></i></a>
+                                                        <a href="{{route('types.remove', $type->id) }}" class="btn btn-danger" id="delete">
+                                                                <i class="fas fa-trash"></i>
+                                                        </a>
+                                                        
                                                     </td>
                                                 </tr>        
                                                 @endforeach
                                             
-                                                                                        </tbody>
+                                             </tbody>
                                         </table>
                                     </div>
                                 </div>

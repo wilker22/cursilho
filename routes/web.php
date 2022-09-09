@@ -32,6 +32,7 @@ Route::controller(AdminController::class)->group(function(){
 });
 
 Route::resource('admin/types', TypeController::class);
+Route::post('admin/types/remove/{id}', [TypeController::class, 'destroy'])->name('types.remove');
 
 Route::get('/dashboard', function () {
     return view('admin.index');

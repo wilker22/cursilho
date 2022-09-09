@@ -60,7 +60,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        
     }
 
     /**
@@ -69,9 +69,15 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit($id)
     {
-        //
+        $type = Type::find($id);
+       // dd($type->id);
+        if(!$type){
+            return redirect()->back();
+        }
+
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -81,9 +87,18 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTypeRequest $request, Type $type)
+    public function update(UpdateTypeRequest $request,$id)
     {
-        //
+        $type = Type::find($id);
+        
+        $type->update($request->all());
+        
+        $notification = [
+            'message' => 'Tipo atualizado com sucesso!',
+            'type-alert' => 'success'
+        ];
+
+        return redirect()->route('types.index')->with($notification);
     }
 
     /**
@@ -92,8 +107,17 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy($id)
     {
-        //
+        $type = Type::find($id);
+    	$type->delete();
+
+    	$notification = array(
+    		'message' => 'Tipo removido com sucesso!',
+    		'alert-type' => 'info'
+    	);
+
+    	return redirect()->route('user.view')->with($notification);
+
     }
 }
